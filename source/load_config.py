@@ -1,3 +1,9 @@
+# *---------------------------------------------------------------------------------------------
+# *  Copyright (c). All rights reserved.
+# *  Licensed under the LICENSE-APACHE. See License.txt in the project root for license information.
+# *--------------------------------------------------------------------------------------------*
+
+
 import os
 import json
 
@@ -10,7 +16,12 @@ def load_config():
             json.dump(
                 {
                     "version": "0.0.1",
-                    "analysis": {"security": False, "viewTree": False},
+                    "analysis": {
+                        "refactor": True,
+                        "security": False,
+                        "viewTree": False,
+                    },
+                    "ignore": ["packages", "venv", ".git", "__pycache__", ".husky"],
                 },
                 file,
                 indent=4,

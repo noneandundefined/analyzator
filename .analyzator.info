@@ -3,5 +3,6 @@
 # *  Licensed under the LICENSE-APACHE. See License.txt in the project root for license information.
 # *--------------------------------------------------------------------------------------------*
 
-
-CONFIG_FILE = ".analyzator"
+refactor - Созданные но не использованные переменные или функции
+security - Анализ кода на потенциальные ошибки
+viewTree - Вывод в стиле дерева зависимости папок и файлов

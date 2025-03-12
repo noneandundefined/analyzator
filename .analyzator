@@ -1,7 +1,15 @@
 {
 	"version": "0.0.1",
 	"analysis": {
+		"refactor": true,
 		"security": false,
-		"viewTree": true
-	}
+		"viewTree": false
+	},
+	"ignore": [
+		"packages",
+		"venv",
+		".git",
+		"__pycache__",
+		".husky"
+	]
 }
