@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+
+echo "${GREEN}Running pre-commit hook...${RESET}"
+
+# COLORS
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+# Получаем текущую ветку
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Получаем список измененных файлов
+CHANGED_FILES=$(git diff --cached --name-only)
+
+### React Native ###
+if [ "$CURRENT_BRANCH" = "main" ] && echo "$CHANGED_FILES" | grep -qE '^source/'; then
+    echo -e "${BLUE}Changes in 'python' directory detected.${NC}"
+
+    echo -e "${GREEN}[|] Running formatted and build for python...${NC}"
+    black .
+    flake8 .
+
+    git add .
+    echo -e "${GREEN}[+] Success formatted and build for python!${NC}"
+    cd ..
+elif echo "$CHANGED_FILES" | grep -qE '^source/'; then
+    echo -e "${BLUE}Changes in 'python' directory detected. Only formatting will be done.${NC}"
+    black .
+    flake8 .
+
+    git add .
+    echo -e "${GREEN}[+] Success formatted for client-mobilpythone!${NC}"
+    cd ..
+else
+    echo -e "${BLUE}No changes in 'python' directory. Skipping actions for client-mobile.${NC}"
+fi
